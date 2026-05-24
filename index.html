@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>True Millionaire Calculator</title>
+    <style>
+        /* Import a classic, elegant Art Deco style font */
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Special+Elite&display=swap');
+
+        :root {
+            --bg-color: #12161a;      /* Deep Gatsby charcoal/black */
+            --paper-color: #f4ebd0;   /* Aged parchment cream */
+            --gold: #c5a059;          /* Burnished metallic gold */
+            --gold-bright: #e5c17d;   /* Highlight gold */
+            --dark-text: #1a1a1a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            /* Subtle vintage canvas pattern overlay */
+            background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 24px 24px;
+            color: var(--paper-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        /* Art Deco Frame Box */
+        .container {
+            max-width: 550px;
+            width: 100%;
+            margin: auto;
+            background: var(--paper-color);
+            color: var(--dark-text);
+            padding: 3rem 2rem;
+            border: 4px solid var(--gold);
+            outline: 2px solid var(--dark-text);
+            outline-offset: -12px;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+        }
+
+        /* Decorative Art Deco Corner Accents */
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 14px; left: 14px; right: 14px; bottom: 14px;
+            border: 1px solid var(--gold);
+            pointer-events: none;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-weight: 900;
+            text-align: center;
+            color: var(--dark-text);
+            font-size: 2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            border-bottom: 2px double var(--gold);
+            padding-bottom: 1rem;
+        }
+
+        .subtitle-group {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 2.5rem;
+        }
+
+        .era-line {
+            font-size: 1.1rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+
+        .baseline-line {
+            font-size: 0.8rem;
+            color: #555;
+            font-style: italic;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .input-wrapper {
+            position: relative;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+        .currency-symbol {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            background-color: transparent;
+            padding: 10px 15px 10px 40px;
+            border: none;
+            border-bottom: 3px solid var(--dark-text);
+            font-family: 'Special Elite', monospace; /* Typewriter look */
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: var(--dark-text);
+            outline: none;
+            text-align: center;
+        }
+
+        input[type="number"]:focus {
+            border-bottom-color: var(--gold);
+        }
+
+        /* Striking vintage flat button style */
+        button {
+            display: block;
+            width: 80%;
+            margin: 0 auto;
+            background-color: var(--dark-text);
+            color: var(--paper-color);
+            border: 2px solid var(--gold);
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            padding: 12px;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        button:hover {
+            background-color: var(--gold);
+            color: var(--dark-text);
+            border-color: var(--dark-text);
+        }
+
+        .result-box {
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 2px double var(--gold);
+            display: none;
+            text-align: center;
+        }
+
+        .result-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-main {
+            font-family: 'Cinzel', serif;
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: var(--dark-text);
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 0px var(--gold);
+        }
+
+        .result-stats {
+            font-family: 'Special Elite', monospace;
+            font-size: 0.95rem;
+            color: #222;
+            line-height: 1.8;
+            border: 1px dashed var(--gold);
+            padding: 1.2rem;
+            background: rgba(197, 160, 89, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>True Millionaire<br><span style="font-size: 1.3rem; letter-spacing: 5px;">in today's money</span></h1>
+    
+    <div class="subtitle-group">
+        <div class="era-line">from Rockefeller era</div>
+        <div class="baseline-line">Uses the average CPI from 1920–1929 as a baseline</div>
+    </div>
+
+    <div class="form-group">
+        <label for="amount">Enter Wealth Amount</label>
+        <div class="input-wrapper">
+            <span class="currency-symbol">$</span>
+            <!-- Set default value to 1000000 per instructions -->
+            <input type="number" id="amount" value="1000000" min="0" step="1" required>
+        </div>
+    </div>
+
+    <button onclick="calculateInflation()">Evaluate Fortune</button>
+
+    <div class="result-box" id="resultBox">
+        <div class="result-label">Modern Equivalent Value</div>
+        <div class="result-main" id="todayValue">$0.00</div>
+        <div class="result-stats" id="statDetails"></div>
+    </div>
+</div>
+
+<script>
+    // Average CPI from 1920 to 1929 is exactly 17.16
+    const CPI_1920S_AVG = 17.16;
+    
+    // Current CPI for 2026
+    const CPI_TODAY = 333.0; 
+
+    function calculateInflation() {
+        const amountInput = document.getElementById('amount').value;
+        const amount = parseFloat(amountInput);
+
+        if (isNaN(amount) || amount <= 0) {
+            alert("Pray tell, enter a valid fortune greater than zero.");
+            return;
+        }
+
+        // The Math
+        const todayValue = amount * (CPI_TODAY / CPI_1920S_AVG);
+        const percentageIncrease = ((CPI_TODAY - CPI_1920S_AVG) / CPI_1920S_AVG) * 100;
+
+        // Display Currency
+        document.getElementById('todayValue').innerText = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            maximumFractionDigits: 0 // Kept flat without cents for cleaner aesthetic on big numbers
+        }).format(todayValue);
+
+        // Display Vintage Style Readout
+        document.getElementById('statDetails').innerHTML = `
+            STATEMENT: Cumulative price index expansion stands at a staggering ${percentageIncrease.toFixed(0)}% since the Roaring Twenties. <br><br>
+            A single dollar asset held during the Rockefeller era wields the purchasing capability of roughly $${(CPI_TODAY / CPI_1920S_AVG).toFixed(2)} in modern currency.
+        `;
+
+        document.getElementById('resultBox').style.display = 'block';
+    }
+
+    // Run calculation once on page load so the default $1,000,000 shows up automatically
+    window.onload = calculateInflation;
+</script>
+
+</body>
+</html>
